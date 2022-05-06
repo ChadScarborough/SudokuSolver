@@ -19,7 +19,6 @@ namespace SudokuSolver
         private const int NUMBER_OF_CELLS_PER_GROUP = 9;
         private const int BOX_SIDE_LENGTH = 3;
 
-
         public Form1()
         {
             InitializeComponent();
@@ -68,21 +67,26 @@ namespace SudokuSolver
             {
                 foreach (Cell cell in cells)
                 {
-                    if (cell.IsGivenCell() && cell.IsValid() == false)
-                    {
-                        cell.GetTextBox().ForeColor = System.Drawing.Color.FromName("Red");
-                        ErrorLbl.Text = "Invalid starting state";
-                        SolveBtn.Enabled = true;
-                        ClearGroups();
-                        ClearCells();
-                        throw new System.Exception();
-                    }
+                    ThrowExceptionIfCellIsInvalid(cell);
                 }
                 return false;
             }
             catch
             {
                 return true;
+            }
+        }
+        
+        private void ThrowExceptionIfCellIsInvalid(Cell cell)
+        {
+            if (cell.IsGivenCell() && cell.IsValid() == false)
+            {
+                cell.GetTextBox().ForeColor = System.Drawing.Color.FromName("Red");
+                ErrorLbl.Text = "Invalid starting state";
+                SolveBtn.Enabled = true;
+                ClearGroups();
+                ClearCells();
+                throw new System.Exception();
             }
         }
 
