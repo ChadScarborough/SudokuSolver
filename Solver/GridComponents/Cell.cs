@@ -15,7 +15,6 @@ namespace SudokuSolver
         }
     }
 
-
     public abstract class Cell
     {
         protected int _value;
@@ -91,6 +90,7 @@ namespace SudokuSolver
         }
 
         public abstract bool IsVariableCell();
+        
         public bool IsGivenCell()
         {
             return !IsVariableCell();
